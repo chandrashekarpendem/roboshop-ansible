@@ -9,7 +9,7 @@
     state: absent
 
 - name: create html content directory
-  ansible.builtin.template:
+  ansible.builtin.file:
     path: /usr/share/nginx/html
     state: directory
 
@@ -20,7 +20,7 @@
     remote_src: yes
 
 - name: copy the roboshop conf
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
 
