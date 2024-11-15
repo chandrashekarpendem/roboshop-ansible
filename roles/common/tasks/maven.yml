@@ -8,3 +8,7 @@
     name: java-11-openjdk
     state: installed
 
+- name: include app_pre_req file
+  ansible.builtin.include_tasks: "app_preq.yml"
+
+
