@@ -1,0 +1,12 @@
+- name: include python  role from common
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: python.yml
+
+
+
+
+
+
+
+

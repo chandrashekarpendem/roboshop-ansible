@@ -1,0 +1,8 @@
+- name: install python deps
+  ansible.builtin.yum:
+    name:
+     - python3-PyMySQL
+     - mysql
+    state: installed
+
+- name: load mysql schema
