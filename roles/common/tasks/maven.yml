@@ -1,0 +1,25 @@
+- name: Install maven
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: Install java 11
+  ansible.builtin.yum:
+    name: java-11-openjdk
+    state: installed
+
+- name: include app_pre_req file
+  ansible.builtin.include_tasks: "app_pre.yml"
+
+
+- name: mvn
+  ansible.builtin.shell: mvn clean package ; mv target/{{component}}-1.0.jar {{component}}.jar
+  args:
+    chdir: /app
+
+- name: include systemd file
+  ansible.builtin.include_tasks: "systemd.yml"
+
+- name: include mysql schema.yml and run
+  ansible.builtin.include_tasks: "mysql_schema.yml"
+  when: schema_load
