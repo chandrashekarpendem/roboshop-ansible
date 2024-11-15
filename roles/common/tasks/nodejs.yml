@@ -10,7 +10,7 @@
     state: installed
 
 - name: include task from app_preq
-  ansible.builtin.include_tasks: app_req.yml
+  ansible.builtin.include_tasks: app_preq.yml
 
 - name: Install Nodejs dependencies
   community.general.npm:
