@@ -16,7 +16,7 @@
 - name: download and unzip {{component}} content
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
-    dest: /tmp/frontend.zip
+    dest: /usr/share/nginx/html
     remote_src: yes
 
 - name: copy the roboshop conf
