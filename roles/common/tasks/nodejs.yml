@@ -10,8 +10,7 @@
     state: installed
 
 - name: include task from app_preq
-  ansible.builtin.include_tasks:
-    name: pre_req.yml
+  ansible.builtin.include_tasks: pre_req.yml
 
 - name: Install Nodejs dependencies
   community.general.npm:
@@ -19,7 +18,7 @@
     state: latest
 
 - name: include systemd file
-  ansible.builtin.include_tasks: "systemd.yml"
+  ansible.builtin.include_tasks: systemd.yml
 
 - name: load schema
   ansible.builtin.include_tasks: "mongodb_schema.yml"
