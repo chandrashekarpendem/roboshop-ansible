@@ -7,7 +7,7 @@
 - name: Install Redis 7
   ansible.builtin.dnf:
     name: redis
-    state: latest
+    state: installed
 
 - name:  Redis config file - Update Listen Address
   ansible.builtin.replace:
