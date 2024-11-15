@@ -9,12 +9,12 @@
     state: absent
 
 - name: create html content directory
-  ansible.builtin.file:
+  ansible.builtin.template:
     path: /usr/share/nginx/html
     state: directory
 
 - name: download and unzip {{component}} content
-  ansible.builtin.file:
+  ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
     dest: /tmp/frontend.zip
     remote_src: yes
