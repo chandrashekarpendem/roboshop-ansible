@@ -13,3 +13,5 @@
     login_host: mysql-dev.chandrap.shop
     login_user: root
     login_password: "{{root_mysql_password}}"
+  vars:
+  root_mysql_password: lookup('aws_ssm', 'mysql.pass', region='us-east-1' )

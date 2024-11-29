@@ -1,3 +1,4 @@
 component: user
 app_path: /app
 schema_load: false
+app_version: 1.0.0

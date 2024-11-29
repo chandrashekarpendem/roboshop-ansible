@@ -44,3 +44,5 @@
         - {name: "dev.rabbitmq.AMQP_PASS", value: "roboshop123" }
         - { name: "sonar.pass", value: "admin123" }
         - { name: "nexus.pass", value: "admin123" }
+        - { name: "mysql.pass", value: "roboshop@1" }
+        - { name: "rabbitmq.pass", value: "roboshop123" }
