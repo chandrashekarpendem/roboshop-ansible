@@ -49,4 +49,5 @@
         - { name: "dev.doc_db.user", value: "admin1" }
         - { name: "dev.doc_db.pass", value: "roboshop123" }
         - { name: "dev.rds_db.user", value: "roboshop123" }
+
         - { name: "dev.rds_db.pass", value: "roboshop123" }
