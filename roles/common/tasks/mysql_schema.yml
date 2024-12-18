@@ -5,13 +5,31 @@
      - mysql
     state: installed
 
-- name: Load MySQL Schema
-  community.mysql.mysql_db:
-    state: import
-    name: all
-    target: /app/schema/{{component}}.sql
-    login_host: mysql-dev.chandrap.shop
-    login_user: root
-    login_password: "{{root_mysql_password}}"
-  vars:
-  root_mysql_password: lookup('aws_ssm', 'mysql.pass', region='us-east-1' )
+#- name: Load MySQL Schema
+#  community.mysql.mysql_db:
+#    state: import
+#    name: all
+#    target: /app/schema/{{component}}.sql
+#    login_host: mysql-dev.chandrap.shop
+#    login_user: root
+#    login_password: "{{root_mysql_password}}"
+#  vars:
+#  root_mysql_password: lookup('aws_ssm', 'mysql.pass', region='us-east-1' )
+- name: Check Schema
+  ansible.builtin.shell: echo 'show databases' | mysql -h {{ lookup('aws_ssm', '{{env}}.rds.endpoint', region='us-east-1' ) }} -u{{ lookup('aws_ssm', '{{env}}.rds_db.user', region='us-east-1' ) }} -p{{ lookup('aws_ssm', '{{env}}.rds_db.pass', region='us-east-1' ) }} | grep cities
+  register: out
+  ignore_errors: true
+
+- name: print
+  ansible.builtin.debug:
+    msg: "{{ out }}"
+
+- name: load mysql schema
+  ansible.builtin.shell: mysql -h {{ lookup('aws_ssm', '{{env}}.rds.endpoint', region='us-east-1' ) }} -u{{ lookup('aws_ssm', '{{env}}.rds_db.user', region='us-east-1' ) }} -p{{ lookup('aws_ssm', '{{env}}.rds_db.pass', region='us-east-1' ) }} </app/schema/{{component}}.sql
+  when: out.rc != 0
+
+
+- name: REStart {{component}} Service
+  ansible.builtin.systemd:
+    name: "{{component}}"
+    state: restarted
