@@ -3,10 +3,6 @@
     name: common
     tasks_from: maven.yml
 
-- name: include app pre_req
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: app_preq.yml
 
 - name:  maven clean package
   ansible.builtin.shell: mvn clean package ; mv target/{{component}}-1.0.jar {{component}}.jar  # there could be a npm module, However we are still using shell, Since these steps will get removed when CI comes in.
