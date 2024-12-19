@@ -10,21 +10,21 @@
       loop:
           - { name: "dev.cart.REDIS_HOST", value: "redis-dev.chandrap.shop" }
           - { name: "dev.cart.CATALOGUE_HOST", value: "catalogue-dev.chandrap.shop" }
-          - { name: "dev.cart.CATALOGUE_PORT", value: "8080" }
+          - { name: "dev.cart.CATALOGUE_PORT", value: "80" }
           - { name: "dev.catalogue.MONGO", value: "true" }
           - { name: "dev.catalogue.MONGO_URL", value: "mongodb://mongodb-dev.chandrap.shop:27017/catalogue" }
-          - { name: "dev.frontend.CATALOGUE_URL", value: "http://catalogue-dev.chandrap.shop:8080/" }
-          - { name: "dev.frontend.CART_URL", value: "http://cart-dev.chandrap.shop:8080/" }
-          - { name: "dev.frontend.USER_URL", value: "http://user-dev.chandrap.shop:8080/" }
-          - { name: "dev.frontend.PAYMENT_URL", value: "http://payment-dev.chandrap.shop:8080/" }
-          - { name: "dev.frontend.SHIPPING_URL", value: "http://shipping-dev.chandrap.shop:8080/" }
+          - { name: "dev.frontend.CATALOGUE_URL", value: "http://catalogue-dev.chandrap.shop:80/" }
+          - { name: "dev.frontend.CART_URL", value: "http://cart-dev.chandrap.shop:80/" }
+          - { name: "dev.frontend.USER_URL", value: "http://user-dev.chandrap.shop:80/" }
+          - { name: "dev.frontend.PAYMENT_URL", value: "http://payment-dev.chandrap.shop:80/" }
+          - { name: "dev.frontend.SHIPPING_URL", value: "http://shipping-dev.chandrap.shop:80/" }
           - { name: "dev.payment.CART_HOST", value: "cart-dev.chandrap.shop" }
           - { name: "dev.payment.USER_HOST", value: "user-dev.chandrap.shop" }
-          - { name: "dev.payment.CART_PORT", value: "8080" }
-          - { name: "dev.payment.USER_PORT", value: "8080" }
+          - { name: "dev.payment.CART_PORT", value: "80" }
+          - { name: "dev.payment.USER_PORT", value: "80" }
           - { name: "dev.payment.AMQP_HOST", value: "rabbitmq-dev.chandrap.shop" }
           - { name: "dev.payment.AMQP_USER", value: "roboshop" }
-          - { name: "dev.shipping.CART_ENDPOINT", value: "cart-dev.chandrap.shop:8080" }
+          - { name: "dev.shipping.CART_ENDPOINT", value: "cart-dev.chandrap.shop:80" }
           - { name: "dev.shipping.DB_HOST", value: "mysql-dev.chandrap.shop" }
           - { name: "dev.user.MONGO", value: "true" }
           - { name: "dev.user.MONGO_URL", value: "mongodb://mongodb-dev.chandrap.shop:27017/users" }
@@ -49,5 +49,4 @@
         - { name: "dev.doc_db.user", value: "admin1" }
         - { name: "dev.doc_db.pass", value: "roboshop123" }
         - { name: "dev.rds_db.user", value: "roboshop123" }
-
         - { name: "dev.rds_db.pass", value: "roboshop123" }
