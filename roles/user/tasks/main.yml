@@ -8,12 +8,6 @@
     name: common
     tasks_from: app_preq.yml
 
-# there could be a npm module, However we are still using shell, Since these steps will get removed when CI comes in.
-- name: Install Nodejs dependencies
-  community.general.npm:
-    path: /app
-    state: latest
-
 - name: include the systemd role
   ansible.builtin.include_role:
     name: common
