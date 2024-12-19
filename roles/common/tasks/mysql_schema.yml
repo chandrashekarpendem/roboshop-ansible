@@ -29,7 +29,5 @@
   when: out.rc != 0
 
 
-- name: REStart {{component}} Service
-  ansible.builtin.systemd:
-    name: "{{component}}"
-    state: restarted
+- name: include systemd file
+  ansible.builtin.include_tasks: "systemd.yml"
