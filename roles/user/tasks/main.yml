@@ -3,15 +3,7 @@
     name: common
     tasks_from: nodejs.yml
 
-- name: include app pre_req
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: app_preq.yml
 
-- name: include the systemd role
-  ansible.builtin.include_role:
-    name: common
-    tasks_from: systemd.yml
 
 
 
