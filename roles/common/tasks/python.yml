@@ -7,7 +7,7 @@
     state: installed
 
 - name: include app_pre_req file
-  ansible.builtin.include_tasks: "app_pre_req.yml"
+  ansible.builtin.include_tasks: "app_preq.yml"
 
 
 - name: Install specified python requirements
