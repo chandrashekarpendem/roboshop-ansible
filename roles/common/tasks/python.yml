@@ -1,32 +1,20 @@
-- name: Configure YUM erlag and rabbitmq server Repos from the script provided by vendor
-  ansible.builtin.shell: curl -s {{ item }} |  bash
-  loop:
-    - https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh
-    - https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh
-
-- name: Installing erlang & rabbitmq-server
+- name: install python,gcc and python3-devel
   ansible.builtin.yum:
     name:
-      #    - erlang  //as rabbitmq-server itself installing the erlang-26.0 so no need separately from 18/05/23 this issue happening
-      - rabbitmq-server
+      - python36
+      - gcc
+      - python3-devel
     state: installed
 
+- name: include app_pre_req file
+  ansible.builtin.include_tasks: "app_pre_req.yml"
 
-- name: Start service rabbitmq-server
-  ansible.builtin.systemd:
-    name: rabbitmq-server
-    state: restarted
-    enabled: yes
 
-- name: add application user roboshop and give priv & make admin
-  community.rabbitmq.rabbitmq_user:
-    user: roboshop
-    password: "{{rabbitmq_roboshop_password}}"
-    vhost: /
-    configure_priv: .*
-    read_priv: .*
-    write_priv: .*
-    state: present
-    tags: administrator
-  vars:
-    rabbitmq_roboshop_password: "{{ lookup('aws_ssm', '{{env}}.{{component}}.AMQP_PASS', region='us-east-1' ) }}"
+- name: Install specified python requirements
+  ansible.builtin.pip:
+    requirements: /app/requirements.txt
+    executable: pip3.6
+
+
+- name: include systemd file
+  ansible.builtin.include_tasks: "systemd.yml"
