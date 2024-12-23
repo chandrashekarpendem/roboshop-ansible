@@ -2,11 +2,16 @@
   ansible.builtin.template:
     src: prometheus.service
     dest: /etc/systemd/system/prometheus.service
+  when: prometheus_config == "yes"
 
 - name: copy prometheus yml config file
   ansible.builtin.template:
     src: prometheus.yml
     dest: /opt/prometheus/prometheus-3.1.0-rc.0.linux-amd64
+  vars:
+    labels:
+      - { tag: "env", label: "environment" }
+      - { tag: "Name", label: "name" }
 
 - name: Start prometheus Service
   ansible.builtin.systemd_service:
