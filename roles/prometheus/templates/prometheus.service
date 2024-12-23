@@ -1,0 +1,12 @@
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/prometheus/prometheus-3.1.0-rc.0.linux-amd64
+ExecStart=/opt/prometheus/prometheus-3.1.0-rc.0.linux-amd64/prometheus
+
+[Install]
+WantedBy=multi-user.target
