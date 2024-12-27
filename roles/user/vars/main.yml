@@ -2,3 +2,4 @@ component: user
 app_path: /app
 schema_load: true
 app_version: 1.0.0
+service_name: user

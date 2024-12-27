@@ -31,6 +31,8 @@
           - { name: "dev.user.REDIS_HOST", value: "redis-dev.chandrap.shop" }
           - { name: "sonar.user", value: "admin" }
           - { name: "nexus.user", value: "admin" }
+          - { name: "ses.user", value: "AKIATJHQDRTK7XQCC26E" }
+          - { name: "ses.pass", value: "BJf443PNYCZH1+tv9IKxzDlQxSVMBXJ8okUMeEKSbpwx" }
 
 
     - name: Create Secrets
@@ -50,3 +52,5 @@
         - { name: "dev.doc_db.pass", value: "roboshop123" }
         - { name: "dev.rds_db.user", value: "roboshop123" }
         - { name: "dev.rds_db.pass", value: "roboshop123" }
+        - { name: "dev-SSH.user", value: "centos" }
+        - { name: "dev-SSH.pass", value: "DevOps321" }

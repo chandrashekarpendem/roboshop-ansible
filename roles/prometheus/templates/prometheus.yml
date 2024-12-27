@@ -9,29 +9,31 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets:
-          # - alertmanager:9093
+            - localhost:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-# - "first_rules.yml"
-# - "second_rules.yml"
+  - "record_rules.yml"
+  - "alert-rules.yml"
+  - "alerts/*.yml"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: "prometheus"
     static_configs:
       - targets: ["localhost:9090"]
-  - job_name: "RobotShop-ec2-nodes"
+  - job_name: 'ec2-nodes'
     ec2_sd_configs:
+      #ec2 service discovery(sd) it can discover automatically collects metrics from nodes
       - region: us-east-1
         port: 9100
         filters:
-          - name: "tag:project"
-            values: [ "RobotShop" ]
+          - name: "tag:Project"
+            values: ["RobotShop"]
     relabel_configs:
+#      expression below always give in starting
 {% for item in labels %}
-      - source_labels: [__meta_ec2_tag_{{ item.tag }}]
-        target_label: {{ item.label }}
+- source_labels: [__meta_ec2_tag_{{ item.tag }}]
+  target_label: {{ item.label }}
 {% endfor %}

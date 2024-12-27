@@ -1,21 +1,47 @@
-- name: copy prometheus service config file
-  ansible.builtin.template:
-    src: prometheus.service
-    dest: /etc/systemd/system/prometheus.service
-  when: prometheus_config == "yes"
-
-- name: copy prometheus yml config file
+- name: Copy Prometheus Config
   ansible.builtin.template:
     src: prometheus.yml
-    dest: /opt/prometheus/prometheus-3.1.0-rc.0.linux-amd64/prometheus.yml
+    dest: /opt/prometheus/prometheus.yml
   vars:
     labels:
       - { tag: "env", label: "environment" }
       - { tag: "Name", label: "name" }
 
-- name: Start prometheus Service
-  ansible.builtin.systemd_service:
-    name: prometheus.service
+- name : copy record rules file
+  ansible.builtin.template:
+    src: record_rules.yml
+    dest:  /opt/prometheus/record_rules.yml
+    remote_src: yes
+
+- name : copy alert rules file
+  ansible.builtin.template:
+    src: alert-rules.yml
+    dest:  /opt/prometheus/alert-rules.yml
+    remote_src: yes
+
+- name: Restart Prometheus
+  ansible.builtin.systemd:
+    name: prometheus
     state: restarted
-    enabled: true
-    daemon-reload: true
+
+- name: check whether prometheus  started or not
+  ansible.builtin.shell: netstat -lntp | grep 9090
+
+
+- name : copy alert-manager file
+  ansible.builtin.template:
+    src: alertmanager.yml
+    dest:  /opt/alertmanager/alertmanager.yml
+    remote_src: yes
+
+- name: Restart Alert-manager
+  ansible.builtin.systemd:
+    name: alertmanager
+    state: restarted
+
+- name: check whether alertmanager  started or not
+  ansible.builtin.shell: netstat -lntp | grep 9093
+
+
+## grafana given in meta file
+
