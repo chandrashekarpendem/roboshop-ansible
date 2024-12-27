@@ -4,10 +4,10 @@
     tasks_from: maven.yml
 
 
-#- name:  maven clean package
-#  ansible.builtin.shell: mvn clean package ; mv target/{{component}}-1.0.jar {{component}}.jar  # there could be a npm module, However we are still using shell, Since these steps will get removed when CI comes in.
-#  args:
-#    chdir: "{{app_path}}"
+- name:  maven clean package
+  ansible.builtin.shell: mvn clean package ; mv target/{{component}}-1.0.jar {{component}}.jar  # there could be a npm module, However we are still using shell, Since these steps will get removed when CI comes in.
+  args:
+    chdir: "{{app_path}}"
 
 - name: include the mysql-schema role
   ansible.builtin.include_role:

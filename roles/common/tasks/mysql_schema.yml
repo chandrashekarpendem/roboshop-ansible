@@ -15,6 +15,7 @@
 #    login_password: "{{root_mysql_password}}"
 #  vars:
 #  root_mysql_password: lookup('aws_ssm', 'mysql.pass', region='us-east-1' )
+
 - name: Check Schema
   ansible.builtin.shell: echo 'show databases' | mysql -h {{ lookup('aws_ssm', '{{env}}.rds.endpoint', region='us-east-1' ) }} -u{{ lookup('aws_ssm', '{{env}}.rds_db.user', region='us-east-1' ) }} -p{{ lookup('aws_ssm', '{{env}}.rds_db.pass', region='us-east-1' ) }} | grep cities
   register: out
