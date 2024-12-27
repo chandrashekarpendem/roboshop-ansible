@@ -29,8 +29,8 @@ scrape_configs:
       - region: us-east-1
         port: 9100
         filters:
-          - name: "tag:Project"
-            values: ["RobotShop"]
+          - name: "tag:project"
+            values: ["roboshop1"]
     relabel_configs:
 #      expression below always give in starting
 {% for item in labels %}
