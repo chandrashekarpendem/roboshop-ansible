@@ -4,17 +4,17 @@
 - name: install  prometheus node exporter
   ansible.builtin.shell: sudo labauto prometheus-node-exporter
 
-#- name: setup prometheus alert config file
-#  ansible.builtin.template:
-#    src: alert.yml
-#    dest: /tmp/alert.yml
-#
-#- name: Copy Prometheus Alerts Configuration to Prometheus Server
-#  ansible.builtin.shell: sshpass -p {{ lookup('aws_ssm', '{{env}}-SSH.pass', region='us-east-1' ) }} scp /tmp/alert.yml {{ lookup('aws_ssm', '{{env}}-SSH.user', region='us-east-1' ) }}@172.31.90.184:/opt/prometheus/alerts/{{component}}.yml
-#
-#- name: reload  prometheus server
-#  ansible.builtin.shell: curl -v -s -XPOST http://172.31.23.120:9090/-/reload
-#
+- name: setup prometheus alert config file
+  ansible.builtin.template:
+    src: alert.yml
+    dest: /tmp/alert.yml
+
+- name: Copy Prometheus Alerts Configuration to Prometheus Server
+  ansible.builtin.shell: sshpass -p {{ lookup('aws_ssm', '{{env}}-SSH.pass', region='us-east-1' ) }} scp /tmp/alert.yml {{ lookup('aws_ssm', '{{env}}-SSH.user', region='us-east-1' ) }}@172.31.90.184:/opt/prometheus/alerts/{{component}}.yml
+
+- name: reload  prometheus server
+  ansible.builtin.shell: curl -v -s -XPOST http://172.31.85.246:9090/-/reload
+
 #
 ##- name: import ELK
 ##  ansible.builtin.import_role:
