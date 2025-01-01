@@ -1,0 +1,13 @@
+- name: stop the application service {{component}}
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    state: stopped
+
+- name: restart the task
+  ansible.builtin.include_tasks: "app_preq.yml"
+
+
+- name: start the application service {{component}}
+  ansible.builtin.systemd:
+    name: "{{ component }}"
+    state: started

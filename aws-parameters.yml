@@ -27,6 +27,11 @@
           - { name: "dev.shipping.CART_ENDPOINT", value: "cart-dev.chandrap.shop:80" }
           - { name: "dev.shipping.DB_HOST", value: "mysql-dev.chandrap.shop" }
           - { name: "dev.user.MONGO", value: "true" }
+          - { name: "dev.user.app_version", value: "true" }
+          - { name: "dev.cart.app_version", value: "true" }
+          - { name: "dev.catalogue.app_version", value: "true" }
+          - { name: "dev.payment.app_version", value: "true" }
+          - { name: "dev.shipping.app_version", value: "true" }
           - { name: "dev.user.MONGO_URL", value: "mongodb://mongodb-dev.chandrap.shop:27017/users" }
           - { name: "dev.user.REDIS_HOST", value: "redis-dev.chandrap.shop" }
           - { name: "sonar.user", value: "admin" }

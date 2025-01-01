@@ -1,5 +1,5 @@
 component: payment
 app_path: /app
 schema_load: false
-app_version: 1.0.0
+app_version: "{{ lookup('aws_ssm', "{{env}}.{{component}}.app_version", region='us-east-1' ) }}"
 service_name: nginx

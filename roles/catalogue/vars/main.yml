@@ -2,5 +2,5 @@ component: catalogue
 app_path: /app
 schema_load: true
 schema_type: mongod
-app_version: 1.0.0
+app_version: "{{ lookup('aws_ssm', "{{env}}.{{component}}.app_version", region='us-east-1' ) }}"
 service_name: catalogue
